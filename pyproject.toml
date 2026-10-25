@@ -1,0 +1,88 @@
+[project]
+name = "ai-devops-assistant"
+version = "0.1.0"
+description = "Rules-first AI assistant that diagnoses CI failures, Kubernetes problems and Terraform plan risk, with secret redaction, prompt-injection defenses and an eval-gated CI."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Raees Khan" }]
+requires-python = ">=3.12"
+dependencies = [
+  "anthropic==1.13.0",
+  "httpx==0.28.1",
+  "pydantic==2.14.0",
+  "typer==0.27.3",
+]
+
+[project.scripts]
+aida = "ai_devops_assistant.cli:app"
+aida-mcp = "ai_devops_assistant.mcp_server:main"
+
+[project.optional-dependencies]
+mcp = ["mcp==2.3.0"]
+
+[dependency-groups]
+dev = [
+  "mypy==2.4.0",
+  "pytest==9.1.1",
+  "pytest-cov==7.1.0",
+  "ruff==0.17.0",
+  "yamllint==1.38.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "C4", "SIM", "RUF", "PT", "PL", "T20"]
+ignore = [
+  "PLR2004", # magic values in comparisons are fine for thresholds
+  "PLR0913", # CLI commands legitimately take many options
+  "PLR0912", # rule engines are branchy by nature
+  "PLR0915",
+  "PLR0917",
+  "PLR0911",
+  "PLC0415", # optional provider SDKs are imported lazily on purpose
+  "S105",    # false positives on regex names containing the word secret
+  "S603",    # subprocess is used deliberately, behind an allow-list
+  "RUF001",
+  "E501",    # long prose strings in rule text are intentional; the formatter handles code
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S106", "S108", "PLR0911", "E501", "T20", "S311", "PT018", "PLR2004", "RUF012", "SIM117"]
+"src/ai_devops_assistant/cli.py" = ["T20"]
+"src/ai_devops_assistant/evals/*.py" = ["T20"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["src", "tests"]
+warn_unreachable = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+  "redaction: secret redaction corpus tests",
+  "injection: prompt injection and untrusted-input tests",
+  "readonly: read-only guarantees for the kubectl collector",
+]
+
+[tool.coverage.run]
+source = ["ai_devops_assistant"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = true

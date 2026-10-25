@@ -1,0 +1,18 @@
+{
+  "target": "job/batch-nightly",
+  "namespace": "data",
+  "pod": null,
+  "deployment": null,
+  "describe": "Name:             batch-6b8c-zz1\nNamespace:        data\nNode:             <none>\nLabels:           app=batch\nStatus:           Pending\nControlled By:    Job/batch-nightly\nContainers:\n  batch:\n    Image:          ghcr.io/acme/batch:2.0\n    State:          Waiting\n      Reason:       ContainerCreating\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  24Gi\n    Requests:\n      memory:  24Gi\n      cpu:  2\nConditions:\n  Type              Status\n  PodScheduled      False\nEvents:\n  Warning  FailedScheduling  5m  pod/batch-6b8c-zz1  0/5 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n5m          Warning   FailedScheduling   pod/batch-6b8c-zz1           0/5 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Job/batch-nightly",
+    "Pod/batch-6b8c-zz1"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

@@ -1,0 +1,60 @@
+{
+  "target": "statefulset/trainer",
+  "namespace": "ml",
+  "pod": {
+    "metadata": {
+      "name": "trainer-0",
+      "namespace": "ml",
+      "labels": {
+        "app": "trainer"
+      },
+      "ownerReferences": [
+        {
+          "kind": "StatefulSet",
+          "name": "trainer",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "trainer",
+          "image": "ghcr.io/acme/trainer:3.1",
+          "resources": {
+            "limits": {
+              "memory": "16Gi"
+            },
+            "requests": {
+              "memory": "16Gi",
+              "cpu": "4"
+            }
+          }
+        }
+      ]
+    },
+    "status": {
+      "phase": "Pending",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "False"
+        }
+      ],
+      "containerStatuses": []
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             trainer-0\nNamespace:        ml\nNode:             <none>\nLabels:           app=trainer\nStatus:           Pending\nControlled By:    StatefulSet/trainer\nContainers:\n  trainer:\n    Image:          ghcr.io/acme/trainer:3.1\n    State:          Waiting\n      Reason:       ContainerCreating\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  16Gi\n    Requests:\n      memory:  16Gi\n      cpu:  4\nConditions:\n  Type              Status\n  PodScheduled      False\nEvents:\n  Warning  FailedScheduling  6m  pod/trainer-0  0/4 nodes are available: 4 node(s) had untolerated taint {dedicated: gpu}. preemption: 0/4 nodes are available: 4 Preemption is not helpful for scheduling.\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n6m          Warning   FailedScheduling   pod/trainer-0                0/4 nodes are available: 4 node(s) had untolerated taint {dedicated: gpu}. preemption: 0/4 nodes are available: 4 Preemption is not helpful for scheduling.\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "StatefulSet/trainer",
+    "Pod/trainer-0"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

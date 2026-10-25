@@ -1,0 +1,7 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run aws s3 sync ./dist s3://acme-prod-site
+2026-10-21T09:12:04.1000148Z upload: dist/index.html to s3://acme-prod-site/index.html
+2026-10-21T09:12:05.1000185Z upload failed: dist/assets/app.js to s3://acme-prod-site/assets/app.js An error occurred (ExpiredToken) when calling the PutObject operation: The provided token has expired.
+2026-10-21T09:12:06.1000222Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,94 @@
+name: AI DevOps Assistant - CI failure triage
+description: >-
+  Diagnoses a failed GitHub Actions run (rules first, optional LLM second), redacts secrets before anything is sent
+  anywhere, and posts ONE updating PR comment or issue. Suggestions are never applied automatically.
+author: Raees Khan
+branding:
+  icon: search
+  color: blue
+
+inputs:
+  run-id:
+    description: "Failed workflow run id to triage (default: the run that triggered this workflow_run event)."
+    default: ${{ github.event.workflow_run.id }}
+  repository:
+    description: OWNER/NAME that owns the run.
+    default: ${{ github.repository }}
+  github-token:
+    description: Token used to read the run logs and write the comment/issue. Needs actions read, plus pull-requests and/or issues write.
+    default: ${{ github.token }}
+  post:
+    description: "none | auto | pr | issue. auto = comment on the PR if the run has one, otherwise open/update an issue."
+    default: auto
+  provider:
+    description: "auto | anthropic | openai_compatible | mock | none. auto picks a model backend only when a key/endpoint is provided."
+    default: auto
+  model:
+    description: Model id override (default claude-sonnet-5-5 for the anthropic provider).
+    default: ""
+  anthropic-api-key:
+    description: Optional. Without any key the action runs in rules-only mode and still produces a useful diagnosis.
+    default: ""
+  openai-base-url:
+    description: Optional base URL of an OpenAI-compatible chat completions endpoint.
+    default: ""
+  openai-api-key:
+    description: Optional API key for the OpenAI-compatible endpoint.
+    default: ""
+  rules-only:
+    description: Never call a model, even if a key is present.
+    default: "false"
+  max-cost-usd:
+    description: Per-run worst-case cost cap. The model call is skipped above it.
+    default: "0.10"
+  explain:
+    description: Include the evidence trail (which rules matched, what was redacted) in the comment.
+    default: "false"
+
+outputs:
+  category:
+    description: Root-cause category chosen for the failure.
+    value: ${{ steps.triage.outputs.category }}
+  url:
+    description: URL of the posted comment or issue (empty if nothing was posted).
+    value: ${{ steps.triage.outputs.url }}
+  mode:
+    description: rules-only or rules+llm.
+    value: ${{ steps.triage.outputs.mode }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+      with:
+        version: "0.13.0"
+        enable-cache: false
+
+    - name: Triage the failed run
+      id: triage
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        RUN_ID: ${{ inputs.run-id }}
+        REPO: ${{ inputs.repository }}
+        POST: ${{ inputs.post }}
+        PROVIDER: ${{ inputs.provider }}
+        MODEL: ${{ inputs.model }}
+        RULES_ONLY: ${{ inputs.rules-only }}
+        MAX_COST: ${{ inputs.max-cost-usd }}
+        EXPLAIN: ${{ inputs.explain }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        ANTHROPIC_API_KEY: ${{ inputs.anthropic-api-key }}
+        AIDA_OPENAI_BASE_URL: ${{ inputs.openai-base-url }}
+        AIDA_OPENAI_API_KEY: ${{ inputs.openai-api-key }}
+        UV_PROJECT_ENVIRONMENT: ${{ runner.temp }}/aida-venv
+      run: |
+        set -euo pipefail
+        args=(ci-triage --run-id "${RUN_ID}" --repo "${REPO}" --post "${POST}" --provider "${PROVIDER}" --max-cost-usd "${MAX_COST}")
+        if [ -n "${MODEL}" ]; then args+=(--model "${MODEL}"); fi
+        if [ "${RULES_ONLY}" = "true" ]; then args+=(--rules-only); fi
+        if [ "${EXPLAIN}" = "true" ]; then args+=(--explain); fi
+        # Inputs reach the shell only through environment variables (no expression injection),
+        # and the locked dependency set from uv.lock is installed exactly.
+        uv run --project "${ACTION_PATH}" --frozen --no-dev aida "${args[@]}"

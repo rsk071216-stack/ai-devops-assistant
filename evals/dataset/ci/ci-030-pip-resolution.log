@@ -1,0 +1,6 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run pip install -r requirements.txt
+2026-10-21T09:12:04.1000148Z ERROR: Cannot install requests==2.31.0 and urllib3==2.3.0 because these package versions have conflicting dependencies.
+2026-10-21T09:12:05.1000185Z ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/

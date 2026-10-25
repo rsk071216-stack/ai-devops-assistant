@@ -1,0 +1,8 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run npm run build
+2026-10-21T09:12:04.1000148Z <--- Last few GCs --->
+2026-10-21T09:12:05.1000185Z [2211:0x5c4a3a0]    61234 ms: Mark-Compact 1987.6 (2041.2) -> 1986.9 (2042.4) MB
+2026-10-21T09:12:06.1000222Z FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+2026-10-21T09:12:07.1000259Z ##[error]Process completed with exit code 134.

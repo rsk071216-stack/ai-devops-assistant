@@ -1,0 +1,4 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run docker/login-action@v4
+2026-10-21T09:12:01.1000037Z ##[endgroup]
+2026-10-21T09:12:02.1000074Z Error: Input required and not supplied: password
+2026-10-21T09:12:03.1000111Z ##[error]Input required and not supplied: password

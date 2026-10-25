@@ -1,0 +1,66 @@
+{
+  "target": "statefulset/db",
+  "namespace": "data",
+  "pod": {
+    "metadata": {
+      "name": "db-0",
+      "namespace": "data",
+      "labels": {
+        "app": "db"
+      },
+      "ownerReferences": [
+        {
+          "kind": "StatefulSet",
+          "name": "db",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "db",
+          "image": "postgres:17",
+          "resources": {
+            "limits": {
+              "memory": "2Gi"
+            },
+            "requests": {
+              "memory": "1Gi",
+              "cpu": "500m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 5432,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Pending",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "False"
+        }
+      ],
+      "containerStatuses": []
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             db-0\nNamespace:        data\nNode:             <none>\nLabels:           app=db\nStatus:           Pending\nControlled By:    StatefulSet/db\nContainers:\n  db:\n    Image:          postgres:17\n    Port:           5432/TCP\n    State:          Waiting\n      Reason:       ContainerCreating\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  2Gi\n    Requests:\n      memory:  1Gi\n      cpu:  500m\nConditions:\n  Type              Status\n  PodScheduled      False\nEvents:\n  Warning  FailedScheduling  4m  pod/db-0  0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.\n  Normal  FailedBinding  4m  persistentvolumeclaim/data-db-0  storageclass.storage.k8s.io \"fast-ssd\" not found\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n4m          Warning   FailedScheduling   pod/db-0                     0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.\n4m          Normal    FailedBinding      persistentvolumeclaim/data-db-0 storageclass.storage.k8s.io \"fast-ssd\" not found\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "StatefulSet/db",
+    "Pod/db-0"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

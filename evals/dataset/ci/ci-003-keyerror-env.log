@@ -1,0 +1,10 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run python -m app.migrate
+2026-10-21T09:12:04.1000148Z Traceback (most recent call last):
+2026-10-21T09:12:05.1000185Z   File "/home/runner/work/payments-api/app/config.py", line 11, in <module>
+2026-10-21T09:12:06.1000222Z     DATABASE_URL = os.environ['DATABASE_URL']
+2026-10-21T09:12:07.1000259Z                    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+2026-10-21T09:12:08.1000296Z KeyError: 'DATABASE_URL'
+2026-10-21T09:12:09.1000333Z ##[error]Process completed with exit code 1.

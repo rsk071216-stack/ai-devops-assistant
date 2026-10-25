@@ -1,0 +1,86 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-7d9f6c8b5-x2k9p",
+      "namespace": "prod",
+      "labels": {
+        "app": "api",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-7d9f6c8b5",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "ghcr.io/acme/api:1.4.2",
+          "resources": {
+            "limits": {
+              "memory": "128Mi"
+            },
+            "requests": {
+              "memory": "64Mi",
+              "cpu": "100m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "name": "api",
+          "ready": false,
+          "restartCount": 7,
+          "state": {
+            "waiting": {
+              "reason": "CrashLoopBackOff",
+              "message": "back-off 5m0s restarting failed container"
+            }
+          },
+          "lastState": {
+            "terminated": {
+              "reason": "OOMKilled",
+              "exitCode": 137
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-7d9f6c8b5-x2k9p\nNamespace:        prod\nNode:             aks-nodepool1-41234567-vmss000002/10.240.0.6\nLabels:           app=api\n                  pod-template-hash=7d9f6c8b5\nStatus:           Running\nControlled By:    ReplicaSet/api-7d9f6c8b5\nContainers:\n  api:\n    Image:          ghcr.io/acme/api:1.4.2\n    Port:           8080/TCP\n    State:          Waiting\n      Reason:       CrashLoopBackOff\n    Last State:     Terminated\n      Reason:       OOMKilled\n      Exit Code:    137\n    Ready:          False\n    Restart Count:  7\n    Limits:\n      memory:  128Mi\n    Requests:\n      memory:  64Mi\n      cpu:  100m\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  Warning  BackOff  2m  pod/api-7d9f6c8b5-x2k9p  Back-off restarting failed container api in pod api-7d9f6c8b5-x2k9p\n  Normal  Pulled  14m  pod/api-7d9f6c8b5-x2k9p  Successfully pulled image \"ghcr.io/acme/api:1.4.2\"\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n2m          Warning   BackOff            pod/api-7d9f6c8b5-x2k9p      Back-off restarting failed container api in pod api-7d9f6c8b5-x2k9p\n14m         Normal    Pulled             pod/api-7d9f6c8b5-x2k9p      Successfully pulled image \"ghcr.io/acme/api:1.4.2\"\n",
+  "logs": "",
+  "previous_logs": "2026-10-21T09:10:41Z starting api\n2026-10-21T09:10:44Z loaded 48210 records into cache\n",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5",
+    "Pod/api-7d9f6c8b5-x2k9p"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

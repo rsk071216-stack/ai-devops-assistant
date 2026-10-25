@@ -1,0 +1,10 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run terraform validate
+2026-10-21T09:12:04.1000148Z Error: Reference to undeclared input variable
+2026-10-21T09:12:05.1000185Z 
+2026-10-21T09:12:06.1000222Z   on network.tf line 9, in resource "azurerm_subnet" "app":
+2026-10-21T09:12:07.1000259Z    9:   address_prefixes = [var.app_subnet_cidr]
+2026-10-21T09:12:08.1000296Z 
+2026-10-21T09:12:09.1000333Z An input variable with the name "app_subnet_cidr" has not been declared.

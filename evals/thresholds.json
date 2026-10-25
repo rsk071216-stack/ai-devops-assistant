@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "min_cases": 40,
+    "category_accuracy": 0.89,
+    "fix_hit_rate": 0.89,
+    "standard_category_accuracy": 1.0,
+    "per_kind": {"ci": 0.88, "k8s": 0.9, "terraform": 1.0}
+  },
+  "mock": {
+    "min_cases": 40,
+    "category_accuracy": 1.0,
+    "fix_hit_rate": 1.0,
+    "standard_category_accuracy": 1.0,
+    "novel_category_accuracy": 1.0,
+    "per_kind": {"ci": 1.0, "k8s": 1.0, "terraform": 1.0}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": null,
+  "deployment": null,
+  "describe": "",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n20s         Warning   FailedCreate       replicaset/api-7d9f6c8b5     Error creating: pods \"api-7d9f6c8b5-\" is forbidden: violates PodSecurity \"restricted:latest\": allowPrivilegeEscalation != false (container \"api\" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container \"api\" must set securityContext.capabilities.drop=[\"ALL\"])\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

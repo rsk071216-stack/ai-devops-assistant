@@ -1,0 +1,11 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run terraform validate
+2026-10-21T09:12:04.1000148Z Error: Unsupported argument
+2026-10-21T09:12:05.1000185Z 
+2026-10-21T09:12:06.1000222Z   on main.tf line 27, in resource "aws_s3_bucket" "logs":
+2026-10-21T09:12:07.1000259Z   27:   acl = "private"
+2026-10-21T09:12:08.1000296Z 
+2026-10-21T09:12:09.1000333Z An argument named "acl" is not expected here.
+2026-10-21T09:12:10.1000370Z ##[error]Terraform exited with code 1.

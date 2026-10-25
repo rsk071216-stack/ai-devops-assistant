@@ -1,0 +1,10 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run npm ci
+2026-10-21T09:12:04.1000148Z npm error code ERESOLVE
+2026-10-21T09:12:05.1000185Z npm error ERESOLVE could not resolve
+2026-10-21T09:12:06.1000222Z npm error While resolving: react-dom@19.0.0
+2026-10-21T09:12:07.1000259Z npm error Found: react@18.3.1
+2026-10-21T09:12:08.1000296Z npm error Could not resolve dependency:
+2026-10-21T09:12:09.1000333Z npm error peer react@"^19.0.0" from react-dom@19.0.0

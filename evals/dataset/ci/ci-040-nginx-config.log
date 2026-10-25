@@ -1,0 +1,7 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run docker run --rm -v ./nginx:/etc/nginx/conf.d nginx:1.27 nginx -t
+2026-10-21T09:12:04.1000148Z nginx: [emerg] unknown directive "proxy_pas" in /etc/nginx/conf.d/default.conf:12
+2026-10-21T09:12:05.1000185Z nginx: configuration file /etc/nginx/nginx.conf test failed
+2026-10-21T09:12:06.1000222Z ##[error]Process completed with exit code 1.

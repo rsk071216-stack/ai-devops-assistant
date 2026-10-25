@@ -1,0 +1,8 @@
+2026-10-21T09:12:00.1000000Z #8 [4/6] COPY dist/ /usr/share/nginx/html/
+2026-10-21T09:12:01.1000037Z #8 ERROR: failed to calculate checksum of ref 6f2a: "/dist": not found
+2026-10-21T09:12:02.1000074Z ------
+2026-10-21T09:12:03.1000111Z  > [4/6] COPY dist/ /usr/share/nginx/html/:
+2026-10-21T09:12:04.1000148Z ------
+2026-10-21T09:12:05.1000185Z Dockerfile:12
+2026-10-21T09:12:06.1000222Z ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref 6f2a: "/dist": not found
+2026-10-21T09:12:07.1000259Z ##[error]buildx failed with: ERROR: failed to solve

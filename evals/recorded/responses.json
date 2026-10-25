@@ -1,0 +1,122 @@
+{
+  "ci-038-go-compile": {
+    "category": "build_error",
+    "root_cause": "The Go build fails to compile: `cfg` is referenced in cmd/server/main.go line 42 but never declared in scope, and `logger` is declared but unused (a compile error in Go).",
+    "confidence": "high",
+    "fix_steps": [
+      "Declare or import `cfg` where main.go uses it, for example by loading the config before line 42, or fix the identifier name.",
+      "Use `logger` or remove it; Go refuses to compile unused local variables.",
+      "Reproduce the compile locally with `go build ./...` before pushing."
+    ],
+    "suggested_commands": [
+      "go build ./...",
+      "go vet ./..."
+    ],
+    "evidence_quotes": [
+      "cmd/server/main.go:42:13: undefined: cfg"
+    ],
+    "suggested_patch": null
+  },
+  "ci-039-helm-template": {
+    "category": "config_error",
+    "root_cause": "The Helm chart reads `.Values.image.tag` but `image` is not defined in the values passed to this release, so the template dereferences a nil map.",
+    "confidence": "high",
+    "fix_steps": [
+      "Add `image.tag` to charts/api/values.yaml or to the values file used by this release.",
+      "Make the template defensive: `{{ .Values.image.tag | default .Chart.AppVersion }}`.",
+      "Run `helm template ./charts/api -f <values file>` locally to catch this before deploying."
+    ],
+    "suggested_commands": [
+      "helm template api ./charts/api -f values-prod.yaml"
+    ],
+    "evidence_quotes": [
+      "nil pointer evaluating interface {}.tag"
+    ],
+    "suggested_patch": null
+  },
+  "ci-040-nginx-config": {
+    "category": "config_error",
+    "root_cause": "nginx rejects the configuration: the directive `proxy_pas` in default.conf line 12 does not exist; it is a typo for `proxy_pass`.",
+    "confidence": "high",
+    "fix_steps": [
+      "Change `proxy_pas` to `proxy_pass` on line 12 of nginx/default.conf.",
+      "Keep an `nginx -t` step in CI so typos are caught before the image is built."
+    ],
+    "suggested_commands": [
+      "docker run --rm -v ./nginx:/etc/nginx/conf.d nginx:1.27 nginx -t"
+    ],
+    "evidence_quotes": [
+      "unknown directive \"proxy_pas\""
+    ],
+    "suggested_patch": "-    proxy_pas http://backend;\n+    proxy_pass http://backend;"
+  },
+  "ci-041-maven-compile": {
+    "category": "build_error",
+    "root_cause": "Java compilation fails: OrderService.java line 88 calls `getDiscountCode()` on `Cart`, but that method does not exist (cannot find symbol).",
+    "confidence": "high",
+    "fix_steps": [
+      "Check whether `getDiscountCode()` was renamed or removed in Cart and update the call, or add the method.",
+      "If the symbol comes from another module, rebuild that module first (`mvn -pl <module> -am install`)."
+    ],
+    "suggested_commands": [
+      "mvn -B -q -DskipTests compile"
+    ],
+    "evidence_quotes": [
+      "cannot find symbol",
+      "symbol:   method getDiscountCode()"
+    ],
+    "suggested_patch": null
+  },
+  "ci-042-manifest-validation": {
+    "category": "config_error",
+    "root_cause": "kubeconform rejects k8s/deployment.yaml: `spec.replicas` is a string (probably quoted, such as \"3\") but the schema requires an integer.",
+    "confidence": "high",
+    "fix_steps": [
+      "Unquote the value so it is an integer: `replicas: 3`.",
+      "If the value comes from a template or Helm values, make sure it renders as a number, not a string."
+    ],
+    "suggested_commands": [
+      "kubeconform -strict -summary k8s/"
+    ],
+    "evidence_quotes": [
+      "at '/spec/replicas': got string, want integer"
+    ],
+    "suggested_patch": "-  replicas: \"3\"\n+  replicas: 3"
+  },
+  "k8s-019-evicted": {
+    "category": "evicted_node_pressure",
+    "root_cause": "The kubelet evicted the pod because the node ran low on ephemeral storage. The cache container wrote about 3Gi to its writable layer or emptyDir and has no ephemeral-storage request or limit.",
+    "confidence": "high",
+    "fix_steps": [
+      "Set `resources.requests.ephemeral-storage` and a `limits.ephemeral-storage` so the scheduler accounts for it and only this pod is evicted when it overuses.",
+      "Move large data to a PersistentVolume or a size-limited emptyDir (`sizeLimit`).",
+      "Investigate what writes 3Gi locally (logs, RDB/AOF snapshots) and rotate or relocate it."
+    ],
+    "suggested_commands": [
+      "kubectl describe node <node-name> | grep -A6 Conditions",
+      "kubectl top node"
+    ],
+    "evidence_quotes": [
+      "The node was low on resource: ephemeral-storage"
+    ],
+    "suggested_patch": "   resources:\n     requests:\n+      ephemeral-storage: 1Gi\n     limits:\n+      ephemeral-storage: 4Gi"
+  },
+  "k8s-020-podsecurity-denied": {
+    "category": "admission_denied",
+    "root_cause": "The namespace enforces the PodSecurity `restricted` profile and the pod template violates it, so the ReplicaSet cannot create any pod (no pod exists to inspect).",
+    "confidence": "high",
+    "fix_steps": [
+      "Add a restricted-compliant securityContext to the container: allowPrivilegeEscalation=false and capabilities.drop=[\"ALL\"].",
+      "Also set runAsNonRoot=true and seccompProfile.type=RuntimeDefault, which the restricted profile requires.",
+      "Do not weaken the namespace label unless the workload truly needs privileges."
+    ],
+    "suggested_commands": [
+      "kubectl get ns prod --show-labels",
+      "kubectl -n prod describe rs api-7d9f6c8b5"
+    ],
+    "evidence_quotes": [
+      "violates PodSecurity \"restricted:latest\""
+    ],
+    "suggested_patch": "       securityContext:\n+        allowPrivilegeEscalation: false\n+        capabilities:\n+          drop: [\"ALL\"]\n+        runAsNonRoot: true\n+        seccompProfile:\n+          type: RuntimeDefault"
+  }
+}

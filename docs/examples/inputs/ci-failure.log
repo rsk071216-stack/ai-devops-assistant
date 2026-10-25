@@ -1,0 +1,8 @@
+2026-10-21T09:12:01.1043210Z ##[group]Run aws-actions/configure-aws-credentials@v6
+2026-10-21T09:12:01.1044410Z with:
+2026-10-21T09:12:01.1044900Z   role-to-assume: arn:aws:iam::123456789012:role/github-deploy
+2026-10-21T09:12:01.1045300Z   aws-region: eu-west-1
+2026-10-21T09:12:01.1045800Z ##[endgroup]
+2026-10-21T09:12:01.9120000Z Using token ghp_Aa1Bb2Cc3Aa1Bb2Cc3Aa1Bb2Cc3Aa1Bb2Cc3 for the package registry
+2026-10-21T09:12:02.5503210Z Error: Could not assume role with OIDC: Not authorized to perform sts:AssumeRoleWithWebIdentity
+2026-10-21T09:12:02.5517820Z ##[error]Could not assume role with OIDC: Not authorized to perform sts:AssumeRoleWithWebIdentity

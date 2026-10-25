@@ -1,0 +1,7 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run kubeconform -strict k8s/
+2026-10-21T09:12:04.1000148Z k8s/deployment.yaml - Deployment api is invalid: problem validating schema. Check JSON formatting: jsonschema validation failed with 'https://kubernetesjsonschema.dev/v1.31.0/deployment-apps-v1.json#' - at '/spec/replicas': got string, want integer
+2026-10-21T09:12:05.1000185Z Summary: 6 resources found in 4 files - Valid: 5, Invalid: 1, Errors: 0, Skipped: 0
+2026-10-21T09:12:06.1000222Z ##[error]Process completed with exit code 1.

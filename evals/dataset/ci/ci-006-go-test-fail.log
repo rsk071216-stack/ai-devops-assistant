@@ -1,0 +1,10 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run go test ./...
+2026-10-21T09:12:04.1000148Z --- FAIL: TestParseDuration (0.00s)
+2026-10-21T09:12:05.1000185Z     parse_test.go:31: ParseDuration("1h30") = 1h0m0s, want error
+2026-10-21T09:12:06.1000222Z FAIL
+2026-10-21T09:12:07.1000259Z FAIL	github.com/acme/tools/parse	0.004s
+2026-10-21T09:12:08.1000296Z FAIL
+2026-10-21T09:12:09.1000333Z ##[error]Process completed with exit code 1.

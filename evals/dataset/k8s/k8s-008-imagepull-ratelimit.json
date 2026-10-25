@@ -1,0 +1,80 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-7d9f6c8b5-x2k9p",
+      "namespace": "prod",
+      "labels": {
+        "app": "api",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-7d9f6c8b5",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "nginx:1.27",
+          "resources": {
+            "limits": {
+              "memory": "128Mi"
+            },
+            "requests": {
+              "memory": "64Mi",
+              "cpu": "50m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 80,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Pending",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "name": "api",
+          "ready": false,
+          "restartCount": 0,
+          "state": {
+            "waiting": {
+              "reason": "ErrImagePull",
+              "message": ""
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-7d9f6c8b5-x2k9p\nNamespace:        prod\nNode:             <none>\nLabels:           app=api\n                  pod-template-hash=7d9f6c8b5\nStatus:           Pending\nControlled By:    ReplicaSet/api-7d9f6c8b5\nContainers:\n  api:\n    Image:          nginx:1.27\n    Port:           80/TCP\n    State:          Waiting\n      Reason:       ErrImagePull\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  128Mi\n    Requests:\n      memory:  64Mi\n      cpu:  50m\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  Warning  Failed  1m  pod/api-7d9f6c8b5-x2k9p  Failed to pull image \"nginx:1.27\": failed to copy: httpReadSeeker: failed open: unexpected status code https://registry-1.docker.io/v2/library/nginx/manifests/1.27: 429 Too Many Requests - Server message: toomanyrequests: You have reached your unauthenticated pull rate limit\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n1m          Warning   Failed             pod/api-7d9f6c8b5-x2k9p      Failed to pull image \"nginx:1.27\": failed to copy: httpReadSeeker: failed open: unexpected status code https://registry-1.docker.io/v2/library/nginx/manifests/1.27: 429 Too Many Requests - Server message: toomanyrequests: You have reached your unauthenticated pull rate limit\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5",
+    "Pod/api-7d9f6c8b5-x2k9p"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

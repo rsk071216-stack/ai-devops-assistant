@@ -1,0 +1,61 @@
+{
+  "target": "deployment/web",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "web-8d7f-lp3k",
+      "namespace": "prod",
+      "labels": {
+        "app": "web"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "web-8d7f",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "web",
+          "image": "ghcr.io/acme/web:4.2",
+          "resources": {
+            "limits": {
+              "memory": "256Mi"
+            },
+            "requests": {
+              "memory": "128Mi",
+              "cpu": "100m"
+            }
+          }
+        }
+      ]
+    },
+    "status": {
+      "phase": "Pending",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "False"
+        }
+      ],
+      "containerStatuses": []
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             web-8d7f-lp3k\nNamespace:        prod\nNode:             <none>\nLabels:           app=web\nStatus:           Pending\nControlled By:    ReplicaSet/web-8d7f\nContainers:\n  web:\n    Image:          ghcr.io/acme/web:4.2\n    State:          Waiting\n      Reason:       ContainerCreating\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  256Mi\n    Requests:\n      memory:  128Mi\n      cpu:  100m\nConditions:\n  Type              Status\n  PodScheduled      False\nEvents:\n  Warning  FailedScheduling  3m  pod/web-8d7f-lp3k  0/6 nodes are available: 6 node(s) didn't match Pod's node affinity/selector. preemption: 0/6 nodes are available: 6 Preemption is not helpful for scheduling.\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n3m          Warning   FailedScheduling   pod/web-8d7f-lp3k            0/6 nodes are available: 6 node(s) didn't match Pod's node affinity/selector. preemption: 0/6 nodes are available: 6 Preemption is not helpful for scheduling.\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/web",
+    "ReplicaSet/web-8d7f",
+    "Pod/web-8d7f-lp3k"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

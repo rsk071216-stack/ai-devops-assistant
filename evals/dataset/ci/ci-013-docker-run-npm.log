@@ -1,0 +1,6 @@
+2026-10-21T09:12:00.1000000Z #9 [5/7] RUN npm run build
+2026-10-21T09:12:01.1000037Z #9 14.2 > web@2.0.0 build
+2026-10-21T09:12:02.1000074Z #9 14.2 > vite build
+2026-10-21T09:12:03.1000111Z #9 16.9 vite v6.1.0 building for production...
+2026-10-21T09:12:04.1000148Z #9 17.3 x Build failed in 1.48s
+2026-10-21T09:12:05.1000185Z #9 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1

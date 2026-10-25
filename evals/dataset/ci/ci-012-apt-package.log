@@ -1,0 +1,4 @@
+2026-10-21T09:12:00.1000000Z #6 [3/5] RUN apt-get install -y libgdal-dev python3-dev
+2026-10-21T09:12:01.1000037Z #6 1.2 Reading package lists...
+2026-10-21T09:12:02.1000074Z #6 1.8 E: Unable to locate package libgdal-dev
+2026-10-21T09:12:03.1000111Z #6 ERROR: process "/bin/sh -c apt-get install -y libgdal-dev python3-dev" did not complete successfully: exit code: 100

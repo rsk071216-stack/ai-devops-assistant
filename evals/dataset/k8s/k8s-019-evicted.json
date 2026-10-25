@@ -1,0 +1,68 @@
+{
+  "target": "deployment/cache",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "cache-7f9c-m2n8",
+      "namespace": "prod",
+      "labels": {
+        "app": "cache"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "cache-7f9c",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "cache",
+          "image": "redis:7.4",
+          "resources": {
+            "limits": {
+              "memory": "512Mi"
+            },
+            "requests": {
+              "memory": "256Mi",
+              "cpu": "100m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 6379,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Failed",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [],
+      "reason": "Evicted"
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             cache-7f9c-m2n8\nNamespace:        prod\nNode:             aks-nodepool1-41234567-vmss000002/10.240.0.6\nLabels:           app=cache\nStatus:           Failed\nControlled By:    ReplicaSet/cache-7f9c\nContainers:\n  cache:\n    Image:          redis:7.4\n    Port:           6379/TCP\n    State:          Waiting\n      Reason:       ContainerCreating\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  512Mi\n    Requests:\n      memory:  256Mi\n      cpu:  100m\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  Warning  Evicted  10m  pod/cache-7f9c-m2n8  The node was low on resource: ephemeral-storage. Threshold quantity: 2Gi, available: 1480Mi. Container cache was using 3Gi, request is 0, has larger consumption of ephemeral-storage.\n  Normal  Killing  10m  pod/cache-7f9c-m2n8  Stopping container cache\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n10m         Warning   Evicted            pod/cache-7f9c-m2n8          The node was low on resource: ephemeral-storage. Threshold quantity: 2Gi, available: 1480Mi. Container cache was using 3Gi, request is 0, has larger consumption of ephemeral-storage.\n10m         Normal    Killing            pod/cache-7f9c-m2n8          Stopping container cache\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/cache",
+    "ReplicaSet/cache-7f9c",
+    "Pod/cache-7f9c-m2n8"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

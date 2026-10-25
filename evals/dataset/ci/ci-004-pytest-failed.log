@@ -1,0 +1,16 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run pytest -q
+2026-10-21T09:12:04.1000148Z ............F....F.........
+2026-10-21T09:12:05.1000185Z =================================== FAILURES ===================================
+2026-10-21T09:12:06.1000222Z ______________________________ test_refund_total ______________________________
+2026-10-21T09:12:07.1000259Z     def test_refund_total():
+2026-10-21T09:12:08.1000296Z >       assert refund(Decimal('10.00'), tax=Decimal('2.00')) == Decimal('12.00')
+2026-10-21T09:12:09.1000333Z E       AssertionError: assert Decimal('10.00') == Decimal('12.00')
+2026-10-21T09:12:10.1000370Z tests/test_billing.py:42: AssertionError
+2026-10-21T09:12:11.1000407Z =========================== short test summary info ============================
+2026-10-21T09:12:12.1000444Z FAILED tests/test_billing.py::test_refund_total - AssertionError: assert Decimal('10.00') == ...
+2026-10-21T09:12:13.1000481Z FAILED tests/test_billing.py::test_invoice_rounding - AssertionError
+2026-10-21T09:12:14.1000518Z ========================= 2 failed, 120 passed in 14.21s =======================
+2026-10-21T09:12:15.1000555Z ##[error]Process completed with exit code 1.

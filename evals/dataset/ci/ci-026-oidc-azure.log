@@ -1,0 +1,6 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run azure/login@v3
+2026-10-21T09:12:04.1000148Z Error: AADSTS700213: No matching federated identity record found for presented assertion subject 'repo:acme/payments-api:pull_request'.
+2026-10-21T09:12:05.1000185Z Error: Interactive authentication is needed.

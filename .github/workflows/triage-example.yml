@@ -1,0 +1,47 @@
+name: Triage CI failures
+
+# Consumer example (this repository dogfoods its own action). When a watched workflow fails, the action
+# reads the failed jobs' logs, redacts secrets, diagnoses the failure and posts ONE updating comment on
+# the pull request (or an issue for runs without a PR).
+#
+# Why workflow_run: it executes the trusted workflow from the default branch, so logs produced by
+# untrusted pull requests are analysed WITHOUT giving that code a write token. Never check out or run
+# the failing PR's code in this job.
+#
+# In another repository use:   uses: rsk071216-stack/ai-devops-assistant@<commit-sha>   # pin by SHA
+
+on:
+  workflow_run:
+    workflows: ["Demo failure", "CI"]
+    types: [completed]
+
+# Minimal permissions for the triage job (set per job below; nothing at workflow level).
+permissions: {}
+
+concurrency:
+  group: triage-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    name: triage the failed run
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      actions: read # download the failed jobs' logs
+      contents: read # check out the (trusted) action code
+      issues: write # open/update the triage issue for runs without a PR
+      pull-requests: write # post/update the single PR comment
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Diagnose and post
+        uses: ./
+        with:
+          post: auto
+          # Optional: add a repository secret named ANTHROPIC_API_KEY to enable the LLM layer.
+          # Without it (the default here) the action runs in rules-only mode.
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          explain: "true"

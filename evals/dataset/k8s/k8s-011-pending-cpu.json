@@ -1,0 +1,68 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-5c7d9b8f6-q4w2e",
+      "namespace": "prod",
+      "labels": {
+        "app": "api",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-5c7d9b8f6",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "ghcr.io/acme/api:1.5.0",
+          "resources": {
+            "limits": {
+              "memory": "4Gi"
+            },
+            "requests": {
+              "memory": "4Gi",
+              "cpu": "6"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Pending",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "False"
+        }
+      ],
+      "containerStatuses": []
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-5c7d9b8f6-q4w2e\nNamespace:        prod\nNode:             <none>\nLabels:           app=api\n                  pod-template-hash=7d9f6c8b5\nStatus:           Pending\nControlled By:    ReplicaSet/api-5c7d9b8f6\nContainers:\n  api:\n    Image:          ghcr.io/acme/api:1.5.0\n    Port:           8080/TCP\n    State:          Waiting\n      Reason:       ContainerCreating\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  4Gi\n    Requests:\n      memory:  4Gi\n      cpu:  6\nConditions:\n  Type              Status\n  PodScheduled      False\nEvents:\n  Warning  FailedScheduling  2m  pod/api-5c7d9b8f6-q4w2e  0/3 nodes are available: 3 Insufficient cpu. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n2m          Warning   FailedScheduling   pod/api-5c7d9b8f6-q4w2e      0/3 nodes are available: 3 Insufficient cpu. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-5c7d9b8f6",
+    "Pod/api-5c7d9b8f6-q4w2e"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

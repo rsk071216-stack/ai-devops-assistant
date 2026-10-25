@@ -1,0 +1,6 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run aws-actions/configure-aws-credentials@v6
+2026-10-21T09:12:04.1000148Z Error: Credentials could not be loaded, please check your action inputs: Could not load credentials from any providers
+2026-10-21T09:12:05.1000185Z Error: Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable

@@ -1,0 +1,80 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-7d9f6c8b5-x2k9p",
+      "namespace": "prod",
+      "labels": {
+        "app": "api",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-7d9f6c8b5",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "registry.acme.example/private/api:1.6.0",
+          "resources": {
+            "limits": {
+              "memory": "256Mi"
+            },
+            "requests": {
+              "memory": "128Mi",
+              "cpu": "100m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Pending",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "name": "api",
+          "ready": false,
+          "restartCount": 0,
+          "state": {
+            "waiting": {
+              "reason": "ImagePullBackOff",
+              "message": ""
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-7d9f6c8b5-x2k9p\nNamespace:        prod\nNode:             <none>\nLabels:           app=api\n                  pod-template-hash=7d9f6c8b5\nStatus:           Pending\nControlled By:    ReplicaSet/api-7d9f6c8b5\nContainers:\n  api:\n    Image:          registry.acme.example/private/api:1.6.0\n    Port:           8080/TCP\n    State:          Waiting\n      Reason:       ImagePullBackOff\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  256Mi\n    Requests:\n      memory:  128Mi\n      cpu:  100m\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  Warning  Failed  3m  pod/api-7d9f6c8b5-x2k9p  Failed to pull image \"registry.acme.example/private/api:1.6.0\": rpc error: code = Unknown desc = failed to pull and unpack image: failed to authorize: failed to fetch anonymous token: unexpected status: 401 Unauthorized\n  Warning  Failed  3m  pod/api-7d9f6c8b5-x2k9p  Error: ErrImagePull\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n3m          Warning   Failed             pod/api-7d9f6c8b5-x2k9p      Failed to pull image \"registry.acme.example/private/api:1.6.0\": rpc error: code = Unknown desc = failed to pull and unpack image: failed to authorize: failed to fetch anonymous token: unexpected status: 401 Unauthorized\n3m          Warning   Failed             pod/api-7d9f6c8b5-x2k9p      Error: ErrImagePull\n",
+  "logs": "",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5",
+    "Pod/api-7d9f6c8b5-x2k9p"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

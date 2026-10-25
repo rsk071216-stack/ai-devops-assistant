@@ -1,0 +1,3 @@
+2026-10-21T09:12:00.1000000Z #2 [internal] load metadata for docker.io/library/node:22-alpine
+2026-10-21T09:12:01.1000037Z #2 ERROR: failed to copy: httpReadSeeker: failed open: unexpected status from GET request to https://registry-1.docker.io/v2/library/node/manifests/sha256:abc: 429 Too Many Requests
+2026-10-21T09:12:02.1000074Z toomanyrequests: You have reached your unauthenticated pull rate limit. https://www.docker.com/increase-rate-limit

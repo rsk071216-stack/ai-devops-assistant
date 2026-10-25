@@ -1,0 +1,27 @@
+name: Demo failure
+
+# A DELIBERATELY failing workflow. It only runs when started by hand (never on push or PR), so CI on
+# push stays green. Its failure is then triaged by .github/workflows/triage-example.yml using the
+# action in this repository, in rules-only mode (no API key involved).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: deploy-staging (fails on purpose)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Deploy (DATABASE_URL is intentionally not configured)
+        run: |
+          # A fake, runtime-assembled token shows that redaction happens before anything is posted.
+          REGISTRY_TOKEN="ghp_$(printf 'Aa1Bb2Cc3%.0s' 1 2 3 4)"
+          export REGISTRY_TOKEN
+          bash demo/deploy.sh

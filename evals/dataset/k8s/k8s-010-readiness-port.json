@@ -1,0 +1,89 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-7d9f6c8b5-x2k9p",
+      "namespace": "prod",
+      "labels": {
+        "app": "api",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-7d9f6c8b5",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "ghcr.io/acme/api:1.5.0",
+          "resources": {
+            "limits": {
+              "memory": "256Mi"
+            },
+            "requests": {
+              "memory": "128Mi",
+              "cpu": "100m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 3000,
+              "protocol": "TCP"
+            }
+          ],
+          "readinessProbe": {
+            "httpGet": {
+              "path": "/ready",
+              "port": 8080
+            },
+            "initialDelaySeconds": 3,
+            "timeoutSeconds": 1,
+            "periodSeconds": 5,
+            "failureThreshold": 3
+          }
+        }
+      ]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "name": "api",
+          "ready": false,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-21T09:12:00Z"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-7d9f6c8b5-x2k9p\nNamespace:        prod\nNode:             aks-nodepool1-41234567-vmss000002/10.240.0.6\nLabels:           app=api\n                  pod-template-hash=7d9f6c8b5\nStatus:           Running\nControlled By:    ReplicaSet/api-7d9f6c8b5\nContainers:\n  api:\n    Image:          ghcr.io/acme/api:1.5.0\n    Port:           3000/TCP\n    State:          Running\n      Started:      Wed, 21 Oct 2026 09:12:00 +0000\n    Ready:          False\n    Restart Count:  0\n    Limits:\n      memory:  256Mi\n    Requests:\n      memory:  128Mi\n      cpu:  100m\n    Readiness:       http-get http://:8080/ready delay=3s timeout=1s period=5s #success=1 #failure=3\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  Warning  Unhealthy  30s  pod/api-7d9f6c8b5-x2k9p  Readiness probe failed: Get \"http://10.244.1.15:8080/ready\": dial tcp 10.244.1.15:8080: connect: connection refused\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n30s         Warning   Unhealthy          pod/api-7d9f6c8b5-x2k9p      Readiness probe failed: Get \"http://10.244.1.15:8080/ready\": dial tcp 10.244.1.15:8080: connect: connection refused\n",
+  "logs": "2026-10-21T09:31:00Z INFO listening on :3000\n",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5",
+    "Pod/api-7d9f6c8b5-x2k9p"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}

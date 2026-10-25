@@ -1,0 +1,23 @@
+# Python / uv
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+.coverage
+coverage.xml
+htmlcov/
+
+# Local run output
+.aida/
+out/
+*.sarif
+
+# Secrets and local config (never commit)
+.env
+.env.*
+!.env.example

@@ -1,0 +1,6 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run helm upgrade --install api ./charts/api
+2026-10-21T09:12:04.1000148Z Error: UPGRADE FAILED: template: api/templates/deployment.yaml:21:28: executing "api/templates/deployment.yaml" at <.Values.image.tag>: nil pointer evaluating interface {}.tag
+2026-10-21T09:12:05.1000185Z ##[error]Process completed with exit code 1.

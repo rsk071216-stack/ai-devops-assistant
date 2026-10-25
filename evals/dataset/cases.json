@@ -1,0 +1,771 @@
+[
+  {
+    "id": "ci-001-unbound-variable",
+    "kind": "ci",
+    "input": "ci/ci-001-unbound-variable.log",
+    "expected_category": "missing_env_var",
+    "fix_keywords": [
+      "secrets",
+      "env"
+    ],
+    "difficulty": "standard",
+    "description": "bash unbound variable in deploy script"
+  },
+  {
+    "id": "ci-002-input-required",
+    "kind": "ci",
+    "input": "ci/ci-002-input-required.log",
+    "expected_category": "missing_env_var",
+    "fix_keywords": [
+      "secrets"
+    ],
+    "difficulty": "standard",
+    "description": "action input not supplied"
+  },
+  {
+    "id": "ci-003-keyerror-env",
+    "kind": "ci",
+    "input": "ci/ci-003-keyerror-env.log",
+    "expected_category": "missing_env_var",
+    "fix_keywords": [
+      "env"
+    ],
+    "difficulty": "standard",
+    "description": "python KeyError for a missing env var"
+  },
+  {
+    "id": "ci-004-pytest-failed",
+    "kind": "ci",
+    "input": "ci/ci-004-pytest-failed.log",
+    "expected_category": "test_failure",
+    "fix_keywords": [
+      "pytest"
+    ],
+    "difficulty": "standard",
+    "description": "pytest assertion failures"
+  },
+  {
+    "id": "ci-005-jest-failed",
+    "kind": "ci",
+    "input": "ci/ci-005-jest-failed.log",
+    "expected_category": "test_failure",
+    "fix_keywords": [
+      "failing test"
+    ],
+    "difficulty": "standard",
+    "description": "jest test failures"
+  },
+  {
+    "id": "ci-006-go-test-fail",
+    "kind": "ci",
+    "input": "ci/ci-006-go-test-fail.log",
+    "expected_category": "test_failure",
+    "fix_keywords": [
+      "verbose"
+    ],
+    "difficulty": "standard",
+    "description": "go test failure"
+  },
+  {
+    "id": "ci-007-aws-expired-token",
+    "kind": "ci",
+    "input": "ci/ci-007-aws-expired-token.log",
+    "expected_category": "expired_credentials",
+    "fix_keywords": [
+      "rotate"
+    ],
+    "difficulty": "standard",
+    "description": "AWS session token expired mid-deploy"
+  },
+  {
+    "id": "ci-008-github-bad-credentials",
+    "kind": "ci",
+    "input": "ci/ci-008-github-bad-credentials.log",
+    "expected_category": "expired_credentials",
+    "fix_keywords": [
+      "secret"
+    ],
+    "difficulty": "standard",
+    "description": "GitHub PAT expired"
+  },
+  {
+    "id": "ci-009-azure-secret-expired",
+    "kind": "ci",
+    "input": "ci/ci-009-azure-secret-expired.log",
+    "expected_category": "expired_credentials",
+    "fix_keywords": [
+      "oidc"
+    ],
+    "difficulty": "standard",
+    "description": "Entra client secret expired"
+  },
+  {
+    "id": "ci-010-docker-copy-missing",
+    "kind": "ci",
+    "input": "ci/ci-010-docker-copy-missing.log",
+    "expected_category": "docker_build",
+    "fix_keywords": [
+      "dockerignore"
+    ],
+    "difficulty": "standard",
+    "description": "COPY of a file that is not in the build context"
+  },
+  {
+    "id": "ci-011-docker-pull-denied",
+    "kind": "ci",
+    "input": "ci/ci-011-docker-pull-denied.log",
+    "expected_category": "docker_build",
+    "fix_keywords": [
+      "docker login"
+    ],
+    "difficulty": "standard",
+    "description": "base image cannot be pulled"
+  },
+  {
+    "id": "ci-012-apt-package",
+    "kind": "ci",
+    "input": "ci/ci-012-apt-package.log",
+    "expected_category": "docker_build",
+    "fix_keywords": [
+      "apt-get update"
+    ],
+    "difficulty": "standard",
+    "description": "apt package name wrong for the distro release"
+  },
+  {
+    "id": "ci-013-docker-run-npm",
+    "kind": "ci",
+    "input": "ci/ci-013-docker-run-npm.log",
+    "expected_category": "docker_build",
+    "fix_keywords": [
+      "docker build"
+    ],
+    "difficulty": "standard",
+    "description": "RUN step fails; real error above"
+  },
+  {
+    "id": "ci-014-tf-init-provider",
+    "kind": "ci",
+    "input": "ci/ci-014-tf-init-provider.log",
+    "expected_category": "terraform_init",
+    "fix_keywords": [
+      "init -upgrade"
+    ],
+    "difficulty": "standard",
+    "description": "provider version constraint cannot be satisfied"
+  },
+  {
+    "id": "ci-015-tf-init-backend",
+    "kind": "ci",
+    "input": "ci/ci-015-tf-init-backend.log",
+    "expected_category": "terraform_init",
+    "fix_keywords": [
+      "backend"
+    ],
+    "difficulty": "standard",
+    "description": "backend not initialised"
+  },
+  {
+    "id": "ci-016-tf-validate-unsupported",
+    "kind": "ci",
+    "input": "ci/ci-016-tf-validate-unsupported.log",
+    "expected_category": "terraform_validate",
+    "fix_keywords": [
+      "provider"
+    ],
+    "difficulty": "standard",
+    "description": "argument removed in a provider upgrade"
+  },
+  {
+    "id": "ci-017-tf-validate-undeclared",
+    "kind": "ci",
+    "input": "ci/ci-017-tf-validate-undeclared.log",
+    "expected_category": "terraform_validate",
+    "fix_keywords": [
+      "terraform validate"
+    ],
+    "difficulty": "standard",
+    "description": "reference to an undeclared variable"
+  },
+  {
+    "id": "ci-018-tf-plan-variable",
+    "kind": "ci",
+    "input": "ci/ci-018-tf-plan-variable.log",
+    "expected_category": "terraform_plan",
+    "fix_keywords": [
+      "TF_VAR"
+    ],
+    "difficulty": "standard",
+    "description": "required variable has no value"
+  },
+  {
+    "id": "ci-019-tf-plan-lock",
+    "kind": "ci",
+    "input": "ci/ci-019-tf-plan-lock.log",
+    "expected_category": "terraform_plan",
+    "fix_keywords": [
+      "lock-timeout"
+    ],
+    "difficulty": "standard",
+    "description": "state lock held"
+  },
+  {
+    "id": "ci-020-tf-plan-no-creds",
+    "kind": "ci",
+    "input": "ci/ci-020-tf-plan-no-creds.log",
+    "expected_category": "terraform_plan",
+    "fix_keywords": [
+      "oidc"
+    ],
+    "difficulty": "standard",
+    "description": "provider has no credentials"
+  },
+  {
+    "id": "ci-021-dockerhub-ratelimit",
+    "kind": "ci",
+    "input": "ci/ci-021-dockerhub-ratelimit.log",
+    "expected_category": "rate_limit",
+    "fix_keywords": [
+      "authenticate"
+    ],
+    "difficulty": "standard",
+    "description": "Docker Hub anonymous pull limit"
+  },
+  {
+    "id": "ci-022-github-api-ratelimit",
+    "kind": "ci",
+    "input": "ci/ci-022-github-api-ratelimit.log",
+    "expected_category": "rate_limit",
+    "fix_keywords": [
+      "backoff"
+    ],
+    "difficulty": "standard",
+    "description": "GitHub API rate limit exceeded in a script"
+  },
+  {
+    "id": "ci-023-yaml-workflow",
+    "kind": "ci",
+    "input": "ci/ci-023-yaml-workflow.log",
+    "expected_category": "yaml_syntax",
+    "fix_keywords": [
+      "yamllint"
+    ],
+    "difficulty": "standard",
+    "description": "invalid workflow file"
+  },
+  {
+    "id": "ci-024-yaml-python",
+    "kind": "ci",
+    "input": "ci/ci-024-yaml-python.log",
+    "expected_category": "yaml_syntax",
+    "fix_keywords": [
+      "indentation"
+    ],
+    "difficulty": "standard",
+    "description": "YAML parser error from a config loader"
+  },
+  {
+    "id": "ci-025-oidc-aws",
+    "kind": "ci",
+    "input": "ci/ci-025-oidc-aws.log",
+    "expected_category": "oidc_permission",
+    "fix_keywords": [
+      "id-token",
+      "trust"
+    ],
+    "difficulty": "standard",
+    "description": "AWS role trust does not match"
+  },
+  {
+    "id": "ci-026-oidc-azure",
+    "kind": "ci",
+    "input": "ci/ci-026-oidc-azure.log",
+    "expected_category": "oidc_permission",
+    "fix_keywords": [
+      "federated"
+    ],
+    "difficulty": "standard",
+    "description": "Entra federated credential subject mismatch"
+  },
+  {
+    "id": "ci-027-oidc-missing-permission",
+    "kind": "ci",
+    "input": "ci/ci-027-oidc-missing-permission.log",
+    "expected_category": "oidc_permission",
+    "fix_keywords": [
+      "id-token: write"
+    ],
+    "difficulty": "standard",
+    "description": "job lacks id-token: write"
+  },
+  {
+    "id": "ci-028-resource-not-accessible",
+    "kind": "ci",
+    "input": "ci/ci-028-resource-not-accessible.log",
+    "expected_category": "insufficient_permissions",
+    "fix_keywords": [
+      "permissions"
+    ],
+    "difficulty": "standard",
+    "description": "GITHUB_TOKEN lacks pull-requests: write"
+  },
+  {
+    "id": "ci-029-script-not-executable",
+    "kind": "ci",
+    "input": "ci/ci-029-script-not-executable.log",
+    "expected_category": "insufficient_permissions",
+    "fix_keywords": [
+      "chmod",
+      "update-index"
+    ],
+    "difficulty": "standard",
+    "description": "script lacks the executable bit"
+  },
+  {
+    "id": "ci-030-pip-resolution",
+    "kind": "ci",
+    "input": "ci/ci-030-pip-resolution.log",
+    "expected_category": "dependency_resolution",
+    "fix_keywords": [
+      "lock"
+    ],
+    "difficulty": "standard",
+    "description": "pip cannot satisfy pins"
+  },
+  {
+    "id": "ci-031-npm-eresolve",
+    "kind": "ci",
+    "input": "ci/ci-031-npm-eresolve.log",
+    "expected_category": "dependency_resolution",
+    "fix_keywords": [
+      "lockfile"
+    ],
+    "difficulty": "standard",
+    "description": "npm peer dependency conflict"
+  },
+  {
+    "id": "ci-032-mypy",
+    "kind": "ci",
+    "input": "ci/ci-032-mypy.log",
+    "expected_category": "lint_or_typecheck",
+    "fix_keywords": [
+      "mypy"
+    ],
+    "difficulty": "standard",
+    "description": "mypy errors"
+  },
+  {
+    "id": "ci-033-ruff-format",
+    "kind": "ci",
+    "input": "ci/ci-033-ruff-format.log",
+    "expected_category": "lint_or_typecheck",
+    "fix_keywords": [
+      "ruff"
+    ],
+    "difficulty": "standard",
+    "description": "formatter would reformat files"
+  },
+  {
+    "id": "ci-034-node-heap",
+    "kind": "ci",
+    "input": "ci/ci-034-node-heap.log",
+    "expected_category": "resource_exhaustion",
+    "fix_keywords": [
+      "NODE_OPTIONS"
+    ],
+    "difficulty": "standard",
+    "description": "node build runs out of heap"
+  },
+  {
+    "id": "ci-035-disk-full",
+    "kind": "ci",
+    "input": "ci/ci-035-disk-full.log",
+    "expected_category": "resource_exhaustion",
+    "fix_keywords": [
+      "prune"
+    ],
+    "difficulty": "standard",
+    "description": "runner disk full during docker build"
+  },
+  {
+    "id": "ci-036-dns",
+    "kind": "ci",
+    "input": "ci/ci-036-dns.log",
+    "expected_category": "network_error",
+    "fix_keywords": [
+      "retr"
+    ],
+    "difficulty": "standard",
+    "description": "DNS failure fetching a dependency"
+  },
+  {
+    "id": "ci-037-job-timeout",
+    "kind": "ci",
+    "input": "ci/ci-037-job-timeout.log",
+    "expected_category": "timeout",
+    "fix_keywords": [
+      "timeout-minutes"
+    ],
+    "difficulty": "standard",
+    "description": "job exceeded its time limit"
+  },
+  {
+    "id": "ci-038-go-compile",
+    "kind": "ci",
+    "input": "ci/ci-038-go-compile.log",
+    "expected_category": "build_error",
+    "fix_keywords": [
+      "compile"
+    ],
+    "difficulty": "novel",
+    "description": "compile error the rules do not know"
+  },
+  {
+    "id": "ci-039-helm-template",
+    "kind": "ci",
+    "input": "ci/ci-039-helm-template.log",
+    "expected_category": "config_error",
+    "fix_keywords": [
+      "values"
+    ],
+    "difficulty": "novel",
+    "description": "helm template nil pointer"
+  },
+  {
+    "id": "ci-040-nginx-config",
+    "kind": "ci",
+    "input": "ci/ci-040-nginx-config.log",
+    "expected_category": "config_error",
+    "fix_keywords": [
+      "nginx"
+    ],
+    "difficulty": "novel",
+    "description": "nginx config test fails"
+  },
+  {
+    "id": "ci-041-maven-compile",
+    "kind": "ci",
+    "input": "ci/ci-041-maven-compile.log",
+    "expected_category": "build_error",
+    "fix_keywords": [
+      "symbol"
+    ],
+    "difficulty": "novel",
+    "description": "java compile error the rules do not know"
+  },
+  {
+    "id": "ci-042-manifest-validation",
+    "kind": "ci",
+    "input": "ci/ci-042-manifest-validation.log",
+    "expected_category": "config_error",
+    "fix_keywords": [
+      "replicas"
+    ],
+    "difficulty": "novel",
+    "description": "manifest schema validation"
+  },
+  {
+    "id": "k8s-001-oomkilled",
+    "kind": "k8s",
+    "input": "k8s/k8s-001-oomkilled.json",
+    "expected_category": "oom_killed",
+    "fix_keywords": [
+      "256Mi",
+      "limits"
+    ],
+    "difficulty": "standard",
+    "description": "memory limit too low"
+  },
+  {
+    "id": "k8s-002-oomkilled-jvm",
+    "kind": "k8s",
+    "input": "k8s/k8s-002-oomkilled-jvm.json",
+    "expected_category": "oom_killed",
+    "fix_keywords": [
+      "1Gi",
+      "MaxRAMPercentage"
+    ],
+    "difficulty": "standard",
+    "description": "JVM heap larger than container limit"
+  },
+  {
+    "id": "k8s-003-crashloop-missing-env",
+    "kind": "k8s",
+    "input": "k8s/k8s-003-crashloop-missing-env.json",
+    "expected_category": "crash_loop",
+    "fix_keywords": [
+      "--previous"
+    ],
+    "difficulty": "standard",
+    "description": "app exits because an env var is missing"
+  },
+  {
+    "id": "k8s-004-crashloop-db-refused",
+    "kind": "k8s",
+    "input": "k8s/k8s-004-crashloop-db-refused.json",
+    "expected_category": "crash_loop",
+    "fix_keywords": [
+      "dependency",
+      "logs"
+    ],
+    "difficulty": "standard",
+    "description": "app cannot reach its database"
+  },
+  {
+    "id": "k8s-005-crashloop-exit127",
+    "kind": "k8s",
+    "input": "k8s/k8s-005-crashloop-exit127.json",
+    "expected_category": "crash_loop",
+    "fix_keywords": [
+      "command",
+      "entrypoint"
+    ],
+    "difficulty": "standard",
+    "description": "wrong command in the pod spec"
+  },
+  {
+    "id": "k8s-006-imagepull-tag",
+    "kind": "k8s",
+    "input": "k8s/k8s-006-imagepull-tag.json",
+    "expected_category": "image_pull",
+    "fix_keywords": [
+      "tag"
+    ],
+    "difficulty": "standard",
+    "description": "tag does not exist"
+  },
+  {
+    "id": "k8s-007-imagepull-auth",
+    "kind": "k8s",
+    "input": "k8s/k8s-007-imagepull-auth.json",
+    "expected_category": "image_pull",
+    "fix_keywords": [
+      "imagePullSecrets",
+      "docker-registry"
+    ],
+    "difficulty": "standard",
+    "description": "private registry without pull secret"
+  },
+  {
+    "id": "k8s-008-imagepull-ratelimit",
+    "kind": "k8s",
+    "input": "k8s/k8s-008-imagepull-ratelimit.json",
+    "expected_category": "image_pull",
+    "fix_keywords": [
+      "mirror"
+    ],
+    "difficulty": "standard",
+    "description": "Docker Hub pull limit"
+  },
+  {
+    "id": "k8s-009-liveness-503",
+    "kind": "k8s",
+    "input": "k8s/k8s-009-liveness-503.json",
+    "expected_category": "probe_failure",
+    "fix_keywords": [
+      "startupProbe"
+    ],
+    "difficulty": "standard",
+    "description": "liveness probe kills a slow-starting app"
+  },
+  {
+    "id": "k8s-010-readiness-port",
+    "kind": "k8s",
+    "input": "k8s/k8s-010-readiness-port.json",
+    "expected_category": "probe_failure",
+    "fix_keywords": [
+      "port"
+    ],
+    "difficulty": "standard",
+    "description": "readiness probe targets the wrong port"
+  },
+  {
+    "id": "k8s-011-pending-cpu",
+    "kind": "k8s",
+    "input": "k8s/k8s-011-pending-cpu.json",
+    "expected_category": "pending_resources",
+    "fix_keywords": [
+      "request"
+    ],
+    "difficulty": "standard",
+    "description": "cpu request larger than any node can offer"
+  },
+  {
+    "id": "k8s-012-pending-memory",
+    "kind": "k8s",
+    "input": "k8s/k8s-012-pending-memory.json",
+    "expected_category": "pending_resources",
+    "fix_keywords": [
+      "autoscaler"
+    ],
+    "difficulty": "standard",
+    "description": "memory request does not fit"
+  },
+  {
+    "id": "k8s-013-pending-taint",
+    "kind": "k8s",
+    "input": "k8s/k8s-013-pending-taint.json",
+    "expected_category": "pending_taint_affinity",
+    "fix_keywords": [
+      "tolerations",
+      "dedicated"
+    ],
+    "difficulty": "standard",
+    "description": "pod lacks toleration for a dedicated node pool"
+  },
+  {
+    "id": "k8s-014-pending-selector",
+    "kind": "k8s",
+    "input": "k8s/k8s-014-pending-selector.json",
+    "expected_category": "pending_taint_affinity",
+    "fix_keywords": [
+      "nodeSelector"
+    ],
+    "difficulty": "standard",
+    "description": "nodeSelector matches no node"
+  },
+  {
+    "id": "k8s-015-pending-pvc",
+    "kind": "k8s",
+    "input": "k8s/k8s-015-pending-pvc.json",
+    "expected_category": "pending_pvc",
+    "fix_keywords": [
+      "storageclass",
+      "pvc"
+    ],
+    "difficulty": "standard",
+    "description": "PVC unbound: storage class does not exist"
+  },
+  {
+    "id": "k8s-016-service-selector",
+    "kind": "k8s",
+    "input": "k8s/k8s-016-service-selector.json",
+    "expected_category": "service_selector_mismatch",
+    "fix_keywords": [
+      "patch service",
+      "selector"
+    ],
+    "difficulty": "standard",
+    "description": "Service selects app=api but pods are labelled app=api-server"
+  },
+  {
+    "id": "k8s-017-missing-configmap",
+    "kind": "k8s",
+    "input": "k8s/k8s-017-missing-configmap.json",
+    "expected_category": "missing_config_ref",
+    "fix_keywords": [
+      "create configmap"
+    ],
+    "difficulty": "standard",
+    "description": "ConfigMap referenced by envFrom does not exist"
+  },
+  {
+    "id": "k8s-018-secret-key-missing",
+    "kind": "k8s",
+    "input": "k8s/k8s-018-secret-key-missing.json",
+    "expected_category": "missing_config_ref",
+    "fix_keywords": [
+      "key"
+    ],
+    "difficulty": "standard",
+    "description": "secret exists but key is missing"
+  },
+  {
+    "id": "k8s-019-evicted",
+    "kind": "k8s",
+    "input": "k8s/k8s-019-evicted.json",
+    "expected_category": "evicted_node_pressure",
+    "fix_keywords": [
+      "ephemeral"
+    ],
+    "difficulty": "novel",
+    "description": "pod evicted for ephemeral storage pressure"
+  },
+  {
+    "id": "k8s-020-podsecurity-denied",
+    "kind": "k8s",
+    "input": "k8s/k8s-020-podsecurity-denied.json",
+    "expected_category": "admission_denied",
+    "fix_keywords": [
+      "securityContext"
+    ],
+    "difficulty": "novel",
+    "description": "namespace enforces PodSecurity restricted"
+  },
+  {
+    "id": "tf-001-destroy-database",
+    "kind": "terraform",
+    "input": "terraform/tf-001-destroy-database.json",
+    "expected_category": "destroy_or_replace",
+    "fix_keywords": [
+      "backup"
+    ],
+    "difficulty": "standard",
+    "description": "database destroyed"
+  },
+  {
+    "id": "tf-002-replace-bucket",
+    "kind": "terraform",
+    "input": "terraform/tf-002-replace-bucket.json",
+    "expected_category": "destroy_or_replace",
+    "fix_keywords": [
+      "snapshot",
+      "replacement"
+    ],
+    "difficulty": "standard",
+    "description": "bucket replaced because of a name change"
+  },
+  {
+    "id": "tf-003-ssh-open",
+    "kind": "terraform",
+    "input": "terraform/tf-003-ssh-open.json",
+    "expected_category": "public_exposure",
+    "fix_keywords": [
+      "restrict"
+    ],
+    "difficulty": "standard",
+    "description": "SSH open to the world"
+  },
+  {
+    "id": "tf-004-s3-public",
+    "kind": "terraform",
+    "input": "terraform/tf-004-s3-public.json",
+    "expected_category": "public_exposure",
+    "fix_keywords": [
+      "block"
+    ],
+    "difficulty": "standard",
+    "description": "public access block disabled"
+  },
+  {
+    "id": "tf-005-iam-wildcard",
+    "kind": "terraform",
+    "input": "terraform/tf-005-iam-wildcard.json",
+    "expected_category": "iam_widening",
+    "fix_keywords": [
+      "wildcards"
+    ],
+    "difficulty": "standard",
+    "description": "policy widened to Action * on Resource *"
+  },
+  {
+    "id": "tf-006-admin-attachment",
+    "kind": "terraform",
+    "input": "terraform/tf-006-admin-attachment.json",
+    "expected_category": "iam_widening",
+    "fix_keywords": [
+      "scoped"
+    ],
+    "difficulty": "standard",
+    "description": "AdministratorAccess attached to a role"
+  },
+  {
+    "id": "tf-007-clean-plan",
+    "kind": "terraform",
+    "input": "terraform/tf-007-clean-plan.json",
+    "expected_category": "no_risk_found",
+    "fix_keywords": [],
+    "difficulty": "standard",
+    "description": "only low-risk creates and tag updates"
+  }
+]

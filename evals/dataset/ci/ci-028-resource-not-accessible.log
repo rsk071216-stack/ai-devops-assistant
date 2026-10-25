@@ -1,0 +1,4 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/github-script@v8
+2026-10-21T09:12:01.1000037Z RequestError [HttpError]: Resource not accessible by integration
+2026-10-21T09:12:02.1000074Z     at /home/runner/work/_actions/actions/github-script/v8/dist/index.js:9537:21
+2026-10-21T09:12:03.1000111Z ##[error]Unhandled error: HttpError: Resource not accessible by integration

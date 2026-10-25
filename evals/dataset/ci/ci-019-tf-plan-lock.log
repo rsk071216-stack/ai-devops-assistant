@@ -1,0 +1,13 @@
+2026-10-21T09:12:00.1000000Z ##[group]Run actions/checkout@v7
+2026-10-21T09:12:01.1000037Z Syncing repository: acme/payments-api
+2026-10-21T09:12:02.1000074Z ##[endgroup]
+2026-10-21T09:12:03.1000111Z ##[group]Run terraform plan -input=false
+2026-10-21T09:12:04.1000148Z Acquiring state lock. This may take a few moments...
+2026-10-21T09:12:05.1000185Z 
+2026-10-21T09:12:06.1000222Z Error: Error acquiring the state lock
+2026-10-21T09:12:07.1000259Z 
+2026-10-21T09:12:08.1000296Z Error message: ConditionalCheckFailedException: The conditional request failed
+2026-10-21T09:12:09.1000333Z Lock Info:
+2026-10-21T09:12:10.1000370Z   ID:        3b2f6a7e-0c1d-4e5f-8a9b-1c2d3e4f5a6b
+2026-10-21T09:12:11.1000407Z   Operation: OperationTypeApply
+2026-10-21T09:12:12.1000444Z ##[error]Terraform exited with code 1.

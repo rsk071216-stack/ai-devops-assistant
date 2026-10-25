@@ -1,0 +1,105 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-7d9f6c8b5-x2k9p",
+      "namespace": "prod",
+      "labels": {
+        "app": "api-server",
+        "tier": "backend",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-7d9f6c8b5",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "ghcr.io/acme/api:1.5.0",
+          "resources": {
+            "limits": {
+              "memory": "256Mi"
+            },
+            "requests": {
+              "memory": "128Mi",
+              "cpu": "100m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "name": "api",
+          "ready": true,
+          "restartCount": 0,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-21T09:12:00Z"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-7d9f6c8b5-x2k9p\nNamespace:        prod\nNode:             aks-nodepool1-41234567-vmss000002/10.240.0.6\nLabels:           app=api-server\n                  tier=backend\n                  pod-template-hash=7d9f6c8b5\nStatus:           Running\nControlled By:    ReplicaSet/api-7d9f6c8b5\nContainers:\n  api:\n    Image:          ghcr.io/acme/api:1.5.0\n    Port:           8080/TCP\n    State:          Running\n      Started:      Wed, 21 Oct 2026 09:12:00 +0000\n    Ready:          True\n    Restart Count:  0\n    Limits:\n      memory:  256Mi\n    Requests:\n      memory:  128Mi\n      cpu:  100m\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  <none>\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n\n",
+  "logs": "2026-10-21T09:40:00Z INFO listening on :8080\n",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5",
+    "Pod/api-7d9f6c8b5-x2k9p"
+  ],
+  "services": [
+    {
+      "metadata": {
+        "name": "api"
+      },
+      "spec": {
+        "selector": {
+          "app": "api",
+          "tier": "backend"
+        },
+        "ports": [
+          {
+            "port": 80,
+            "targetPort": 8080
+          }
+        ]
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "metadata": {
+        "name": "api"
+      },
+      "subsets": []
+    }
+  ],
+  "missing_refs": [],
+  "collected_with": []
+}

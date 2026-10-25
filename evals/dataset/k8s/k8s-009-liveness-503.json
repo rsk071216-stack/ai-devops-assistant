@@ -1,0 +1,96 @@
+{
+  "target": "deployment/api",
+  "namespace": "prod",
+  "pod": {
+    "metadata": {
+      "name": "api-7d9f6c8b5-x2k9p",
+      "namespace": "prod",
+      "labels": {
+        "app": "api",
+        "pod-template-hash": "7d9f6c8b5"
+      },
+      "ownerReferences": [
+        {
+          "kind": "ReplicaSet",
+          "name": "api-7d9f6c8b5",
+          "controller": true
+        }
+      ]
+    },
+    "spec": {
+      "containers": [
+        {
+          "name": "api",
+          "image": "ghcr.io/acme/api:1.5.0",
+          "resources": {
+            "limits": {
+              "memory": "256Mi"
+            },
+            "requests": {
+              "memory": "128Mi",
+              "cpu": "100m"
+            }
+          },
+          "ports": [
+            {
+              "containerPort": 8080,
+              "protocol": "TCP"
+            }
+          ],
+          "livenessProbe": {
+            "httpGet": {
+              "path": "/healthz",
+              "port": 8080
+            },
+            "initialDelaySeconds": 5,
+            "timeoutSeconds": 1,
+            "periodSeconds": 10,
+            "failureThreshold": 3
+          }
+        }
+      ]
+    },
+    "status": {
+      "phase": "Running",
+      "conditions": [
+        {
+          "type": "PodScheduled",
+          "status": "True"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "name": "api",
+          "ready": false,
+          "restartCount": 4,
+          "state": {
+            "waiting": {
+              "reason": "CrashLoopBackOff",
+              "message": ""
+            }
+          },
+          "lastState": {
+            "terminated": {
+              "reason": "Error",
+              "exitCode": 137
+            }
+          }
+        }
+      ]
+    }
+  },
+  "deployment": null,
+  "describe": "Name:             api-7d9f6c8b5-x2k9p\nNamespace:        prod\nNode:             aks-nodepool1-41234567-vmss000002/10.240.0.6\nLabels:           app=api\n                  pod-template-hash=7d9f6c8b5\nStatus:           Running\nControlled By:    ReplicaSet/api-7d9f6c8b5\nContainers:\n  api:\n    Image:          ghcr.io/acme/api:1.5.0\n    Port:           8080/TCP\n    State:          Waiting\n      Reason:       CrashLoopBackOff\n    Last State:     Terminated\n      Reason:       Error\n      Exit Code:    137\n    Ready:          False\n    Restart Count:  4\n    Limits:\n      memory:  256Mi\n    Requests:\n      memory:  128Mi\n      cpu:  100m\n    Liveness:       http-get http://:8080/healthz delay=5s timeout=1s period=10s #success=1 #failure=3\nConditions:\n  Type              Status\n  PodScheduled      True\nEvents:\n  Warning  Unhealthy  4m  pod/api-7d9f6c8b5-x2k9p  Liveness probe failed: HTTP probe failed with statuscode: 503\n  Normal  Killing  4m  pod/api-7d9f6c8b5-x2k9p  Container api failed liveness probe, will be restarted\n  Warning  BackOff  1m  pod/api-7d9f6c8b5-x2k9p  Back-off restarting failed container api in pod api-7d9f6c8b5-x2k9p\n",
+  "events": "LAST SEEN   TYPE      REASON             OBJECT                       MESSAGE\n4m          Warning   Unhealthy          pod/api-7d9f6c8b5-x2k9p      Liveness probe failed: HTTP probe failed with statuscode: 503\n4m          Normal    Killing            pod/api-7d9f6c8b5-x2k9p      Container api failed liveness probe, will be restarted\n1m          Warning   BackOff            pod/api-7d9f6c8b5-x2k9p      Back-off restarting failed container api in pod api-7d9f6c8b5-x2k9p\n",
+  "logs": "2026-10-21T09:30:02Z INFO warming caches (this takes ~40s)\n",
+  "previous_logs": "",
+  "owner_chain": [
+    "Deployment/api",
+    "ReplicaSet/api-7d9f6c8b5",
+    "Pod/api-7d9f6c8b5-x2k9p"
+  ],
+  "services": [],
+  "endpoints": [],
+  "missing_refs": [],
+  "collected_with": []
+}
