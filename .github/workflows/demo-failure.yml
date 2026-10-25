@@ -21,7 +21,7 @@ jobs:
           persist-credentials: false
       - name: Deploy (DATABASE_URL is intentionally not configured)
         run: |
-          # A fake, runtime-assembled token shows that redaction happens before anything is posted.
-          REGISTRY_TOKEN="ghp_$(printf 'Aa1Bb2Cc3%.0s' 1 2 3 4)"
-          export REGISTRY_TOKEN
+          # A fake, runtime-assembled key id shows that redaction happens before anything is posted.
+          AWS_ACCESS_KEY_ID="AKIA$(printf 'QWERTY12%.0s' 1 2)"
+          export AWS_ACCESS_KEY_ID
           bash demo/deploy.sh

@@ -6,7 +6,7 @@ set -euo pipefail
 echo "Deploying payments-api to ${TARGET_ENV:-staging}"
 echo "Resolving image tag from the build output"
 echo "Image: ghcr.io/example/payments-api:1.4.2"
-echo "Using registry token ${REGISTRY_TOKEN:-<none>}"
+echo "Using AWS access key id ${AWS_ACCESS_KEY_ID:-<none>}"
 echo "Checking required configuration"
 
 if [ -z "${DATABASE_URL:-}" ]; then
