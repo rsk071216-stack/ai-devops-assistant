@@ -6,7 +6,7 @@ import re
 from dataclasses import dataclass
 
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[ -/]*[@-~]")
-TIMESTAMP_RE = re.compile(r"^﻿?\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z ")
+TIMESTAMP_RE = re.compile(r"^\N{ZERO WIDTH NO-BREAK SPACE}?\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z ")
 ERROR_RE = re.compile(
     r"(?i)(\berror\b|\bfail(?:ed|ure|s)?\b|exception|\bfatal\b|panic|traceback|denied|forbidden|"
     r"unauthorized|exit code|oomkilled|crashloop|\bkilled\b|timed? ?out|not found|##\[error\]|"
