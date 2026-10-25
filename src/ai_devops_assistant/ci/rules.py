@@ -605,7 +605,7 @@ CI_RULES: tuple[LogRule, ...] = (
         patterns=(
             rx(r"Found \d+ errors? in \d+ files?"),
             rx(r"\berror: .* \[[a-z][a-z\-]+\]\s*$"),
-            rx(r"✖ \d+ problems? \(\d+ errors?"),
+            rx(r"\N{HEAVY MULTIPLICATION X} \d+ problems? \(\d+ errors?"),
             rx(r"\berror TS\d{4}:"),
             rx(r"would reformat|Would reformat"),
             rx(r"\S+\.py:\d+:\d+: [A-Z]{1,4}\d{2,4} "),
