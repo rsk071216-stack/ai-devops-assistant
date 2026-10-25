@@ -94,13 +94,13 @@ flowchart TB
 
 | Feature | What it does | Verified by CI |
 | --- | --- | --- |
-| CI failure triage | Downloads failed jobs' logs (or reads a file), redacts, extracts the error window, classifies (17 CI categories), proposes a concrete fix, posts **one** updating PR comment or issue | Unit tests with a fake GitHub API, eval suite |
+| CI failure triage | Downloads failed jobs' logs (or reads a file), redacts, extracts the error window, classifies (19 CI categories), proposes a concrete fix, posts **one** updating PR comment or issue | Unit tests with a fake GitHub API, eval suite |
 | Kubernetes diagnosis | Collects read-only evidence (describe, events, previous logs, owner chain, limits, probes, Services/Endpoints, missing ConfigMap/Secret refs); recognises CrashLoopBackOff, OOMKilled, ImagePullBackOff, probe failures, Pending (resources, taints, affinity, PVC), selector mismatches, missing config; returns exact `kubectl`/YAML fixes | Fixture bundles, read-only guarantees |
 | Terraform plan review | Highlights destroys/replacements, public exposure and IAM widening in plain English, deterministic checks first | Plan fixtures |
 | Provider interface | `anthropic` (official SDK, schema-constrained output), `openai_compatible` (httpx), `mock` (tests) | Fake clients, HTTP mock transport |
 | Redaction | AWS, Azure, GitHub, GitLab, npm, PyPI, Slack, Stripe, Anthropic/OpenAI keys, JWTs, PEM keys, URL passwords, connection strings, K8s Secret data, entropy catch-all | 70-case corpus generated at test time |
 | Injection defenses | Fenced data blocks, strict output schema, quote grounding, inert rendering, no execution anywhere | Payload suite + "no process spawned" guard |
-| Evaluation harness | 69-case golden dataset, per-category accuracy, CI regression gate, job-summary table | Runs on every push |
+| Evaluation harness | 70-case golden dataset, per-category accuracy, CI regression gate, job-summary table | Runs on every push |
 | Observability | Structured JSON logs (metadata only), token and cost counters, `--explain` evidence trail | Tests |
 | MCP server (optional) | Exposes the read-only tools to MCP clients | Tool list asserted |
 | Supply chain | SHA-pinned actions, `uv.lock`, digest-pinned base image, Trivy, cosign-signed GHCR image, Dependabot with cooldown | CI |
@@ -266,14 +266,14 @@ Summary of the [threat model](docs/threat-model.md); every control has a test th
   the error windows and the tail.
 - **Human in the loop.** Output is a comment, an issue or text. Patches are diffs to apply by hand.
 
-**Evaluation method.** `aida eval` scores a 69-case golden dataset (42 CI logs, 20 Kubernetes bundles, 7 Terraform
+**Evaluation method.** `aida eval` scores a 70-case golden dataset (43 CI logs, 20 Kubernetes bundles, 7 Terraform
 plans) for category and key fix elements, in `rules` and `mock` modes, and CI fails below the committed thresholds.
 Offline results (these are **not** live-model measurements; see [docs/evals.md](docs/evals.md)):
 
 | Mode | Cases | Category accuracy | Fix elements | Cases the rules cover | Novel cases |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| rules-only | 69 | 89.9% | 89.9% | 100% | 0% (by design) |
-| mock LLM (recorded answers) | 69 | 100% | 100% | 100% | 100% |
+| rules-only | 70 | 90.0% | 90.0% | 100% | 0% (by design) |
+| mock LLM (recorded answers) | 70 | 100% | 100% | 100% | 100% |
 
 **Honest limits.**
 

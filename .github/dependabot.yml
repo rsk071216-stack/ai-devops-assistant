@@ -37,5 +37,9 @@ updates:
       day: monday
     cooldown:
       default-days: 14
+    ignore:
+      # Stay on the Python 3.12 line (requires-python and uv.lock target 3.12): patch releases only.
+      - dependency-name: python
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
     commit-message:
       prefix: "docker"

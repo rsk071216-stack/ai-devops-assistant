@@ -32,6 +32,7 @@ class Category(StrEnum):
     TIMEOUT = "timeout"
     BUILD_ERROR = "build_error"
     CONFIG_ERROR = "config_error"
+    SECURITY_SCAN = "security_scan_failure"
     # Kubernetes
     CRASH_LOOP = "crash_loop"
     OOM_KILLED = "oom_killed"

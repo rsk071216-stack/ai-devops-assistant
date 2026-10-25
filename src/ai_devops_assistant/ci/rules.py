@@ -517,6 +517,32 @@ CI_RULES: tuple[LogRule, ...] = (
         confidence="medium",
     ),
     LogRule(
+        id="ci.security.scan",
+        category=Category.SECURITY_SCAN,
+        title="A security scan gate failed (vulnerabilities above the allowed severity)",
+        patterns=(
+            rx(r"^Total: \d+ \((?:[A-Z]+: \d+(?:, )?)+\)"),
+            rx(r"found \d+ (?:critical |high |moderate )?vulnerabilit", I),
+            rx(r"\d+ vulnerabilit(?:y|ies) \(", I),
+            rx(r"Failed checks: [1-9]"),
+            rx(r"npm audit.*(?:fix|vulnerabilit)", I),
+        ),
+        root_cause=(
+            "A vulnerability or policy scanner (Trivy, npm audit, checkov and similar) reported findings at or above "
+            "the severity the job is configured to fail on ({names}). The build itself is fine; the gate is doing its job."
+        ),
+        fix_steps=(
+            "Read the findings table: the 'Fixed Version' column shows which version removes the issue.",
+            "Upgrade the affected package or base image to the fixed version and rebuild the image.",
+            "If the finding sits in a base image layer, bump the digest-pinned base image to a newer patch release.",
+            "Only if the finding is not exploitable here, add a reviewed, time-boxed ignore entry (with a reason and an expiry), never a blanket ignore.",
+        ),
+        commands=("trivy image --severity CRITICAL,HIGH --ignore-unfixed <image:tag>", "npm audit fix"),
+        collect=rx(r"^\|\s*(?P<x>[A-Za-z0-9_.\-]+)\s*\|\s*(?:CVE|GHSA)-"),
+        priority=68,
+        confidence="medium",
+    ),
+    LogRule(
         id="ci.timeout",
         category=Category.TIMEOUT,
         title="The job or a step timed out",

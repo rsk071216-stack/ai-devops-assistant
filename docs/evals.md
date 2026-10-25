@@ -5,12 +5,12 @@ answer "how accurate is the model?" and the numbers below must not be read that 
 
 ## What is measured
 
-`evals/dataset/cases.json` lists 69 cases; each has an input fixture, an expected root-cause category and the key
+`evals/dataset/cases.json` lists 70 cases; each has an input fixture, an expected root-cause category and the key
 fix elements (lower-case keywords) the answer must contain.
 
 | Kind | Cases | Examples |
 | --- | ---: | --- |
-| CI logs | 42 | failing tests (pytest, jest, go), missing env var, expired token, Docker build errors (COPY, pull denied, apt, RUN), `terraform` init / validate / plan errors, HTTP 429, YAML errors, OIDC permission denied (AWS, Azure, missing `id-token`), `Resource not accessible`, non-executable script, dependency resolution, lint/type errors, OOM / disk full, DNS, job timeout |
+| CI logs | 43 | failing tests (pytest, jest, go), missing env var, expired token, Docker build errors (COPY, pull denied, apt, RUN), `terraform` init / validate / plan errors, HTTP 429, YAML errors, OIDC permission denied (AWS, Azure, missing `id-token`), `Resource not accessible`, non-executable script, dependency resolution, lint/type errors, OOM / disk full, DNS, job timeout, an image-scan gate failure (adapted from a real run of this repository's own CI, found when a Dependabot PR failed and the action triaged it) |
 | Kubernetes bundles | 20 | CrashLoopBackOff (3 causes), OOMKilled (plain, JVM), ImagePullBackOff (tag, auth, rate limit), liveness / readiness probe failures, Pending (CPU, memory, taint, node selector, PVC), Service selector mismatch, missing ConfigMap / Secret key |
 | Terraform plans | 7 | database destroy, bucket replacement, SSH open to the world, S3 public access block off, IAM wildcard, admin policy attachment, clean plan |
 
@@ -36,8 +36,8 @@ Produced by `aida eval` (also in every CI run's job summary):
 
 | Mode | Cases | Category accuracy | Fix elements present | Standard cases | Novel cases |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| rules | 69 | 89.9% | 89.9% | 100% | 0% |
-| mock | 69 | 100% | 100% | 100% | 100% |
+| rules | 70 | 90.0% | 90.0% | 100% | 0% |
+| mock | 70 | 100% | 100% | 100% | 100% |
 
 Read this honestly:
 

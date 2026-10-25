@@ -9,7 +9,7 @@ published accuracy figures are usually unverifiable marketing.
 
 ## Decision
 
-- A golden dataset (69 cases: CI logs, Kubernetes bundles, Terraform plans) with expected category and key fix
+- A golden dataset (70 cases: CI logs, Kubernetes bundles, Terraform plans) with expected category and key fix
   elements, committed with the code.
 - `aida eval` scores two offline modes: `rules` (the real deterministic analyzers) and `mock` (the whole pipeline
   with recorded answers). `evals/thresholds.json` is committed; CI fails if any metric drops below it and writes the

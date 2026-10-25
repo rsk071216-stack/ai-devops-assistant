@@ -410,6 +410,18 @@
     "description": "job exceeded its time limit"
   },
   {
+    "id": "ci-043-trivy-gate",
+    "kind": "ci",
+    "input": "ci/ci-043-trivy-gate.log",
+    "expected_category": "security_scan_failure",
+    "fix_keywords": [
+      "fixed version",
+      "rebuild"
+    ],
+    "difficulty": "standard",
+    "description": "image scan gate fails on a fixable critical vulnerability (adapted from a real run of this repository's CI)"
+  },
+  {
     "id": "ci-038-go-compile",
     "kind": "ci",
     "input": "ci/ci-038-go-compile.log",
