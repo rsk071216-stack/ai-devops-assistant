@@ -153,7 +153,9 @@ Suggested change (illustrative diff, apply by hand):
 
 The [Demo failure](.github/workflows/demo-failure.yml) workflow (manual dispatch only, never on push) fails on purpose.
 The [Triage CI failures](.github/workflows/triage-example.yml) workflow then ran this repository's own action in
-**rules-only mode** and opened this issue: **DEMO_ISSUE_URL**
+**rules-only mode** (no API key) and opened this issue: **[issue #2, "CI failure triage: Demo failure on main"](https://github.com/rsk071216-stack/ai-devops-assistant/issues/2)**.
+The demo prints a fake, runtime-generated AWS key id; the issue shows `aws_access_key_id x1` in the redaction counts and never the value.
+Running the demo a second time updated the same issue in place ("Updated for run #2") instead of opening another one.
 
 ## Quick start
 
