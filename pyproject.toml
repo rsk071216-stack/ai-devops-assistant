@@ -7,9 +7,9 @@ license = { text = "MIT" }
 authors = [{ name = "Raees Khan" }]
 requires-python = ">=3.12"
 dependencies = [
-  "anthropic==1.13.0",
+  "anthropic==1.17.0",
   "httpx==0.28.1",
-  "pydantic==2.14.0",
+  "pydantic==2.14.2",
   "typer==0.27.3",
 ]
 
@@ -22,10 +22,10 @@ mcp = ["mcp==2.3.0"]
 
 [dependency-groups]
 dev = [
-  "mypy==2.4.0",
-  "pytest==9.1.1",
+  "mypy==2.4.1",
+  "pytest==9.2.0",
   "pytest-cov==7.1.0",
-  "ruff==0.17.0",
+  "ruff==0.17.3",
   "yamllint==1.38.0",
 ]
 
